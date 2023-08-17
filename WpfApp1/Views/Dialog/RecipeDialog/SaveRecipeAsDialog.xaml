@@ -1,0 +1,39 @@
+﻿<Window x:Class="NewRecipeViewer.Views.Dialog.SaveRecipeAsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewRecipeViewer.Views.Dialog"
+        mc:Ignorable="d"
+        
+        Title="Save Recipe As " Height="180" Width="300">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="0,5,0,5" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Save Recipe:"/>
+                <TextBlock MinWidth="80" VerticalAlignment="Center" Block.TextAlignment="Center"
+                           
+                           Text="{Binding CurrentRecipe.Rev_name, Converter={StaticResource StringTrim}, 
+                    RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="reversion:"/>
+                <TextBlock MinWidth="30" VerticalAlignment="Center" Block.TextAlignment="Center"
+                           Text="{Binding CurrentRecipe.Rcp_rev, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="as:"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Height="30">
+                <RadioButton Content="New Reversion" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+                <RadioButton x:Name="new_recipe" Content="New Recipe" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0" IsChecked="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name:"/>
+                <TextBox MinWidth="120" IsEnabled="{Binding ElementName=new_recipe,Path=IsChecked}"
+                         HorizontalContentAlignment="Center" MaxLines="1"
+                         Text="{Binding new_recipe_name, RelativeSource={RelativeSource AncestorType=Window}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,16,10,2">
+                <Button Height="30" Width="100" IsDefault="True" Content="OK" Click="Accept_Button" Margin="0,0,20,0" />
+                <Button Height="30" Width="100" IsCancel="True" Content="Cancel" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

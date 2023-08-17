@@ -1,0 +1,423 @@
+﻿<UserControl x:Class="NewRecipeViewer.Views.CathodePageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             DataContext="{Binding cathodesViewModel, Source={StaticResource Locator}}"
+             d:DesignHeight="480" d:DesignWidth="1000" >
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="480">
+            <WrapPanel Orientation="Horizontal"  Width="1000" VerticalAlignment="Stretch"
+                       DataContext="{Binding cathodesViewModel, Source={StaticResource Locator}}" IsEnabled="{Binding Edit_enable}">
+                <GroupBox Header="Cathode 1" Margin="2,2,2,2" Height="200" Width="420">
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" IsEnabled="{Binding Cathode_enable}">
+                            <Label Content="Operation" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding DC_Cathode_Dict}" SelectedValuePath="Value" 
+                                      DisplayMemberPath="Key"  SelectedValue="{Binding Cath1_Operation}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath1_On}">
+                            <Label Content="Control" Width="70"></Label>
+                            <ComboBox Width="80"></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Shutter" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key" 
+                                      SelectedValue="{Binding Cathode_1.shutter}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Gas valve" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                      SelectedValue="{Binding Cathode_1.gas_valve}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath1_On}"
+                                    >
+                            <Label Content="t-delay" Width="70"/>
+                            <TextBox Width="80"
+                                     Text="{Binding Cathode_1.t_delay, Converter={StaticResource FloatToTimeString}}" MaxLines="1"
+                                     IsEnabled="{Binding Cath1_t_ramp_on}" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2"
+                                    Visibility="{Binding Cath1_On}">
+                            <Label Content="t-ramp" Width="70"/>
+                            <TextBox Width="80"
+                                     Text="{Binding Cath1_T_Ramp, Converter={StaticResource FloatToTimeString}}"
+                                     MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath1_On}">
+                            <Label Content="I Arc 1.1" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2" 
+                                     Text="{Binding Cathode_1.arc_1_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_1.arc_1_end}" IsEnabled="{Binding Cath1_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath1_On}">
+                            <Label Content="I Arc 1.2" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_1.arc_2_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_1.arc_2_end}"
+                                     IsEnabled="{Binding Cath1_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath1_On}">
+                            <Label Content="I Arc 1.3" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_1.arc_3_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_1.arc_3_end}"
+                                     IsEnabled="{Binding Cath1_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+                <Border Width="420" Height="200"></Border>
+                <Border Width="420" Height="200"></Border>
+                <GroupBox Header="Cathode 4" Margin="2,2,2,2" Height="200" Width="420">
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" IsEnabled="{Binding Cathode_enable}">
+                            <Label Content="Operation" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding DC_Cathode_Dict}" SelectedValuePath="Value"
+                                      DisplayMemberPath="Key"  SelectedValue="{Binding Cath4_Operation}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath4_On}">
+                            <Label Content="Control" Width="70"></Label>
+                            <ComboBox Width="80"></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Shutter" Width="70"></Label>
+                            <ComboBox Width="80" 
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                      SelectedValue="{Binding Cathode_4.shutter}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Gas valve" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                      SelectedValue="{Binding Cathode_4.gas_valve}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    IsEnabled="{Binding  Cath4_t_ramp_on}">
+                            <Label Content="t-delay" Width="70"/>
+                            <TextBox Width="80"
+                                     Text="{Binding  Cathode_4.t_delay, Converter={StaticResource FloatToTimeString}}"
+                                     MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2"
+                                    Visibility="{Binding Cath4_On}">
+                            <Label Content="t-ramp" Width="70"/>
+                            <TextBox Width="80"  Text="{Binding Cath4_T_Ramp, 
+                                Converter={StaticResource FloatToTimeString}}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath4_On}">
+                            <Label Content="I Arc 4.1" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_1_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_1_end}"
+                                     IsEnabled="{Binding Cath4_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath4_On}">
+                            <Label Content="I Arc 4.2" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_2_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_2_end}"
+                                     IsEnabled="{Binding Cath4_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath4_On}">
+                            <Label Content="I Arc 4.3" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_3_start}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2"
+                                     Text="{Binding Cathode_4.arc_3_end}"
+                                     IsEnabled="{Binding Cath4_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center"
+                                     >
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+                <Border Width="420" Height="200"></Border>
+                <GroupBox Header="Cathode 6" Margin="2,2,2,2" Height="260" Width="420">
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" IsEnabled="{Binding Cathode_enable}">
+                            <Label Content="Operation" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding DC_Pls_Cathode_Dict}" SelectedValuePath="Value" 
+                                      DisplayMemberPath="Key"  SelectedValue="{Binding Cath6_Operation}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath6_On}">
+                            <Label Content="Control" Width="70"></Label>
+                            <ComboBox Width="80"></ComboBox>
+                            <Label Content="[-]"></Label>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Shutter" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                      SelectedValue="{Binding Cathode_6.shutter}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2">
+                            <Label Content="Gas valve" Width="70"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Gas_Valve_Dict}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                      SelectedValue="{Binding Cathode_6.gas_valve}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_On}">
+                            <Label Content="t-delay" Width="70"/>
+                            <TextBox Width="80"
+                                     Text="{Binding  Cathode_6.t_delay, Converter={StaticResource FloatToTimeString}}" MaxLines="1"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                                    Visibility="{Binding Cath6_On}">
+                            <Label Content="t-ramp" Width="70"/>
+                            <TextBox Width="80" Text="{Binding Cath6_T_Ramp, Converter={StaticResource FloatToTimeString}}"
+                                     MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[hh:mm:ss]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2"
+                                    Visibility="{Binding Cath6_pls_mode}">
+                            <Label Content="Frequency" Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.frequency}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+
+                            <Label Content="[Hz]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_pls_mode}">
+                            <Label Content="R.R.T." Width="70"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.rrt}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+
+                            <Label Content="[µs]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_On}">
+                            <Label Content="I Arc 6.1(high)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_1_start_high}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_1_end_high}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_pls_mode}">
+                            <Label Content="I Arc 6.1(low)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_1_start_low}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_1_end_low}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_On}">
+                            <Label Content="I Arc 6.2(high)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_2_start_high}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_2_end_high}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_pls_mode}">
+                            <Label Content="I Arc 6.2(low)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_2_start_low}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_2_end_low}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_On}">
+                            <Label Content="I Arc 6.3(high)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_3_start_high}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_3_end_high}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Visibility="{Binding Cath6_pls_mode}">
+                            <Label Content="I Arc 6.3(low)" Width="90"/>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_3_start_low}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <TextBox Width="40" Margin="2,2,2,2" Text="{Binding Cathode_6.arc_3_end_low}"
+                                     IsEnabled="{Binding Cath6_t_ramp_on}" MaxLines="1" HorizontalContentAlignment="Center">
+                                <b:Interaction.Behaviors>
+                                    <local:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[A]"/>
+                        </StackPanel>
+                    </WrapPanel>
+                </GroupBox>
+                <TextBox Width="0"/>
+            </WrapPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

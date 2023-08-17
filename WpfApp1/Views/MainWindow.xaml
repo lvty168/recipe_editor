@@ -1,0 +1,151 @@
+﻿<Window x:Class="NewRecipeViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewRecipeViewer"
+        mc:Ignorable="d"
+        Title="Recipe Editor for T2"
+        Height="620" Width="1000" >
+    
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment ="Stretch"
+                DataContext="{Binding Source={StaticResource Locator},Path=main}">
+        <Menu Height="25" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <MenuItem Header="文件" Height="25">
+                <MenuItem Header="Save" Command="{Binding SaveParameterCommand}" 
+                          IsEnabled="{Binding Save_parameter_enable}"/>
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="编辑" Height="25"/>
+            <MenuItem Header="视图" Height="25">
+                <MenuItem Header="recipe" Command="{Binding RecipePageSelectedCommand}"/>
+                <MenuItem Header="compare" Command="{Binding ComparePageSelectedCommand}"/>
+                <MenuItem Header="step" Command="{Binding StepPageSelectedCommand}"/>
+                <MenuItem Header="Parameters" >
+                    <MenuItem Header="Duration" Command="{Binding DurationPageSelectedCommand}" 
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                    <MenuItem Header="Heating" Command="{Binding HeatingPageSelectedCommand}" 
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                    <MenuItem Header="Bias" Command="{Binding BiasPageSelectedCommand}"
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                    <MenuItem Header="Gas Flow" Command="{Binding GasFlowPageSelectedCommand}" 
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                    <MenuItem Header="Cathode" Command="{Binding CathodePageSelectedCommand}" 
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                    <MenuItem Header="UBM PLM" Command="{Binding Ubm_PlmPageSelectedCommand}" 
+                              IsEnabled="{Binding Parameter_loaded}"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="帮助" Height="25"/>
+            
+        </Menu>
+        <ToolBar Height="45" Margin="0,1,0,1">
+            <Button Height="40" MinWidth="40"  Margin="1,0,0,0" 
+                    Command="{Binding ExitCommand}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/exit.png" Width="20" Height="20"/>
+                    <Label Content="Exit" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40"  Margin="1,0,0,0" IsEnabled="{Binding Save_parameter_enable}"
+                    Command="{Binding SaveParameterCommand}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/save.png" Width="20" Height="20"/>
+                    <Label Content="Save" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Separator Width="3"/>
+            <Button Height="40" MinWidth="40"  Margin="2,0,0,0"
+                    Command="{Binding RecipePageSelectedCommand}"
+                    >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/recipe.png" Width="20" Height="20"/>
+                    <Label Content="recipe" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40"  Margin="2,0,0,0">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/compare.png" Width="20" Height="20"/>
+                    <Label Content="compare" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40" Margin="2,0,0,0"
+                    Command="{Binding StepPageSelectedCommand}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/step.png" Width="20" Height="20"/>
+                    <Label Content="step" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Separator Width="3" />
+            <Button Height="40" MinWidth="40"  Margin="1,0,0,0"
+                    Command="{Binding DurationPageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}"
+                    >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/Duration.png" Width="20" Height="20"/>
+                    <Label Content="Duration" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40"  Margin="1,0,0,0"
+                    Command="{Binding HeatingPageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/heating.png" Width="20" Height="20"/>
+                    <Label Content="heating" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40" Margin="2,0,0,0"
+                    Command="{Binding BiasPageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/bias.png" Width="20" Height="20"/>
+                    <Label Content="bias" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40"  Margin="2,0,0,0"
+                    Command="{Binding GasFlowPageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/gas-flow.png" Width="20" Height="20"/>
+                    <Label Content="Gas flow" Padding="5,0,5,0"/>
+                </StackPanel>
+                
+            </Button>
+            <Button Height="40" MinWidth="40"  Margin="2,0,0,0"
+                    Command="{Binding CathodePageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/cathode.png" Width="20" Height="20"/>
+                    <Label Content="Cathode" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+            <Button Height="40" MinWidth="40" Margin="2,0,0,0"
+                    Command="{Binding Ubm_PlmPageSelectedCommand}"
+                    IsEnabled="{Binding Parameter_loaded}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/resource/UBM.png" Width="20" Height="20"/>
+                    <Label Content="UBM PLM" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <ContentControl MinHeight="480" Content="{Binding PageContent}"/>
+        <StatusBar Height="30" VerticalAlignment="Bottom" Margin="0,2,0,0" HorizontalAlignment="Stretch"
+                   
+                   >
+            <StatusBarItem Content="recipe:" HorizontalAlignment="Left"/>
+            <StatusBarItem Width="120" Content="{Binding Current_recipe.Rev_name}" HorizontalAlignment="Left"/>
+            <StatusBarItem Content="step:" HorizontalAlignment="Left"/>
+            <StatusBarItem Width="120" Content="{Binding Current_step.Step_name}" HorizontalAlignment="Left"/>
+            <StatusBarItem Content="step type:" HorizontalAlignment="Left"/>
+            <StatusBarItem Width="120" Content="{Binding Current_step.Step_type, 
+                Converter={StaticResource StepTypeConvert}, Mode=OneWay}" HorizontalAlignment="Left"/>
+            <StatusBarItem Width="160" Content="{Binding Edit_status}"
+                           Background="{Binding Edit_enable, Converter={StaticResource GreenLampConvert}}"
+                           Foreground="White"
+                           HorizontalContentAlignment="Center"
+                           HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        </StatusBar>
+
+
+    </StackPanel>
+</Window>

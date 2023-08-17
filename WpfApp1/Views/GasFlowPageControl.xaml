@@ -1,0 +1,406 @@
+﻿<UserControl x:Class="NewRecipeViewer.Views.GasFlowPageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer.Views"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:bs="clr-namespace:NewRecipeViewer"
+             mc:Ignorable="d" 
+             DataContext="{Binding bendControlViewModel, Source={StaticResource Locator}}"
+             d:DesignHeight="480" d:DesignWidth="1050" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+             ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible">
+            <WrapPanel Orientation="Horizontal" Margin="2,2,2,2" Width="1200">
+                <GroupBox Header="Blend Control" Margin="2,2,0,2">
+                    <StackPanel Orientation="Vertical" 
+                               IsEnabled="{Binding ID_Edit_Enable}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Gas blend control"></Label>
+                            <ComboBox Width="80" ItemsSource="{Binding Blend}" 
+                                      SelectedValuePath="Value" DisplayMemberPath="Key"
+                                      SelectedValue="{Binding Blend_Attribute}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Slave gas" Width="112"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Bld_slave}"
+                                      SelectedValuePath="Value" DisplayMemberPath="Key"
+                                      SelectedValue="{Binding Blend_Slave_Attribute}"
+                                      />
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Master gas" Width="112"></Label>
+                            <ComboBox Width="80" 
+                                      ItemsSource="{Binding Bld_master}"
+                                      SelectedValuePath="Value" DisplayMemberPath="Key"
+                                      SelectedValue="{Binding Blend_Maste_Attribute}"
+                                      ></ComboBox>
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Ratio slave / master"></Label>
+                            <TextBox Width="60" MaxLines="1" HorizontalContentAlignment="Center"
+                                     Text="{Binding Blend_control_parameter.ratio_slaver}">
+                                <b:Interaction.Behaviors>
+                                    <bs:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="/"></Label>
+                            <TextBox Width="60" MaxLines="1" HorizontalContentAlignment="Center"
+                                     Text="{Binding Blend_control_parameter.ratio_master}">
+                                <b:Interaction.Behaviors>
+                                    <bs:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="Pressure Control" Width="700" Margin="5,2,0,2"
+                          DataContext="{Binding Source={StaticResource Locator}, Path=pressureControlViewModel}"
+                          >
+                    <WrapPanel Orientation="Horizontal" IsEnabled="{Binding ID_Edit_Enable}">
+                        <StackPanel Orientation="Horizontal" MinWidth="600">
+                            <Label Content="Pressure control" Width="127"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Press}"
+                                      SelectedValuePath="Value"
+                                      DisplayMemberPath="Key"
+                                      SelectedValue="{Binding Pressure_control_operation}"
+                                      />
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" MinWidth="600" IsEnabled="{Binding Visible}">
+                            <Label Content="Pressure control gas"></Label>
+                            <ComboBox Width="80"
+                                      ItemsSource="{Binding Press_Control_Gas}"
+                                      SelectedValuePath="Value"
+                                      DisplayMemberPath="Key"
+                                      SelectedValue="{Binding Pressure_control_gas}"
+                                      />
+                            <Label Content="[-]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Process pressure" Width="127"></Label>
+                            <TextBox Width="120" 
+                                     Text="{Binding Pressure_control_parameter.process_pressure, 
+                                Converter={StaticResource FloatToScientific}}" HorizontalContentAlignment="Center" MaxLines="1">
+                                <b:Interaction.Behaviors>
+                                    <bs:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[mbar]"></Label>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Max deviation pressure"></Label>
+                            <TextBox Width="120" 
+                                     Text="{Binding Pressure_control_parameter.max_deviation_pressure,
+                                Converter={StaticResource FloatToScientific}}" HorizontalContentAlignment="Center" MaxLines="1">
+                                <b:Interaction.Behaviors>
+                                    <bs:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[mbar]"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" IsEnabled="{Binding Visible}">
+                            <Label Content="Correction flow" Width="127"></Label>
+                            <TextBox Width="120" Text="{Binding Pressure_control_parameter.corrrction_flow}" 
+                                     HorizontalContentAlignment="Center" MaxLines="1">
+                                <b:Interaction.Behaviors>
+                                    <bs:TextBoxEnterKeyUpdateBehavior/>
+                                </b:Interaction.Behaviors>
+                            </TextBox>
+                            <Label Content="[sccm]"></Label>
+                        </StackPanel>
+
+                    </WrapPanel>
+                </GroupBox>
+                <WrapPanel DataContext="{Binding Source={StaticResource Locator},Path=gasChannelsViewModel}" IsEnabled="{Binding Edit_enable}">
+                    <GroupBox Header="Gas channel 1"  Margin="2,2,2,2" Width="550">
+                        <WrapPanel Orientation="Horizontal" >
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="Start flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_1.start_flow}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2">
+                                <Label Content="t-delay" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1"
+                                         Text="{Binding Gas_Channel_1.t_delay, 
+                                    Converter={StaticResource FloatToTimeString}}"
+                                         IsEnabled="{Binding Gas_channel_1_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2">
+                                <Label Content="End flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_1.end_flow}"
+                                         IsEnabled="{Binding Gas_channel_1_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="t-ramp" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1"
+                                         Text="{Binding Gas_T_Ramp_1, 
+                                    Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Label Content="Gas Control:"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Gas channel 2" Width="550" Margin="2,2,2,2">
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="Start flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_2.start_flow}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                <Label Content="t-delay" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_2.t_delay, 
+                                    Converter={StaticResource FloatToTimeString}}"
+                                         IsEnabled="{Binding Gas_channel_2_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2">
+                                <Label Content="End flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_2.end_flow}"
+                                         IsEnabled="{Binding Gas_channel_2_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="t-ramp" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1"
+                                         Text="{Binding Gas_T_Ramp_2, 
+                                    Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Gas Control:"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Gas channel 3" Width="550" Margin="2,2,2,2">
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="Start flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_3.start_flow}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                <Label Content="t-delay" Width="60"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_Channel_3.t_delay, 
+                                    Converter={StaticResource FloatToTimeString}}"
+                                         IsEnabled="{Binding Gas_channel_3_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2">
+                                <Label Content="End flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_3.end_flow}"
+                                         IsEnabled="{Binding Gas_channel_3_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="t-ramp" Width="60"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_T_Ramp_3, 
+                                    Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Gas Control:"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Gas channel 4" Width="550" Margin="2,2,2,2">
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="Start flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_4.start_flow}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2">
+                                <Label Content="t-delay" Width="60"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_Channel_4.t_delay, 
+                                    Converter={StaticResource FloatToTimeString}}"
+                                         IsEnabled="{Binding Gas_channel_4_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2">
+                                <Label Content="End flow" Width="65"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_Channel_4.end_flow}"
+                                         IsEnabled="{Binding Gas_channel_4_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="t-ramp" Width="60"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_T_Ramp_4, 
+                                    Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Gas Control:"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Gas channel 5" Width="550" Margin="2,2,2,2">
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="Start flow" Width="65"></Label>
+                                <TextBox MaxLines="1" Width="80" Text="{Binding Gas_Channel_5.start_flow}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2">
+                                <Label Content="t-delay" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1"
+                                         Text="{Binding Gas_Channel_5.t_delay, 
+                                    Converter={StaticResource FloatToTimeString}}"
+                                         IsEnabled="{Binding Gas_channel_5_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Width="240" Margin="0,2,0,2">
+                                <Label Content="End flow" Width="65"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_Channel_5.end_flow}"
+                                         IsEnabled="{Binding Gas_channel_5_ramp_on}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Label Content="[sccm]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,2,0,2" IsEnabled="{Binding Gas_channel_enable}">
+                                <Label Content="t-ramp" Width="60"></Label>
+                                <TextBox Width="80" MaxLines="1" Text="{Binding Gas_T_Ramp_5, 
+                                    Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                                    <b:Interaction.Behaviors>
+                                        <bs:TextBoxEnterKeyUpdateBehavior/>
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+
+                                <Label Content="[hh:mm:ss]"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Label Content="Gas Control:"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                    <Label BorderBrush="Black" Height="25" Width="25"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
+                    </GroupBox>
+                </WrapPanel>
+                <TextBox Width="0"/>
+            </WrapPanel>
+
+        </ScrollViewer>
+
+
+    </Grid>
+</UserControl>

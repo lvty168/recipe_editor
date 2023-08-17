@@ -1,0 +1,167 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer.Views"
+             
+             xmlns:b ="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vm ="clr-namespace:NewRecipeViewer.ViewModels"
+             xmlns:kk ="clr-namespace:System.Collections.Generic;assembly=System.Runtime"
+             xmlns:Diagnostics="clr-namespace:System.Diagnostics;assembly=System.Diagnostics.PerformanceCounter" 
+             x:Class="NewRecipeViewer.Views.RecipePageControl"
+             mc:Ignorable="d" 
+             VerticalAlignment="Stretch"
+             d:DesignHeight="480" Width="1000" >
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0,2,0,2" 
+                DataContext="{Binding Source={StaticResource Locator}, Path=recipe}">
+        <StackPanel Orientation="Vertical" Margin="2,0,2,0" >
+            <DataGrid  Height="410" Width="320" ItemsSource="{Binding Recipes}"
+                       SelectedValue="{Binding CurrentRecipe}"
+                       AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" >
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IDrelease}" Value="6">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding UseEmRcp}" Value="1">
+                                <Setter Property="Background" Value="Yellow"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding EmRecipe}" Value="1">
+                                <Setter Property="Background" Value="Yellow"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Rev_date}" Width="130" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Rev" Binding="{Binding Rcp_rev}" Width="40" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Rev_name}" Width="130" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Use" Binding="{Binding UseEmRcp}" Width="40" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="3" Margin="1,1,1,1" Height="60">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Content="Recipe Header" Margin="1,1,1,1"
+                        Command="{Binding RecipeHandelEditCommand}" />
+                <Button Grid.Column="1" Grid.Row="0" Content="New Recipe" Margin="1,1,1,1" 
+                        Command="{Binding NewRecipeCommand}"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="Delete Recipe" Margin="1,1,1,1"
+                        Command="{Binding DeleteRecipeCommand}" />
+                <Button Grid.Column="0" Grid.Row="1" Content="Save Recipe As" Margin="1,1,1,1" 
+                        Command="{Binding SaveAsRecipeCommand}"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Save Actual Rcp" Margin="1,1,1,1" IsEnabled="False"/>
+                <Button Grid.Column="2" Grid.Row="1" Content="Print Recipe" Margin="1,1,1,1" />
+            </Grid>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="2,0,2,0" Width="260">
+            <GroupBox Header="recipe parameters" IsEnabled="False">
+                <StackPanel Orientation="Vertical" Margin="0,1,0,1">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Venting temperature:" MinWidth="140"/>
+                        <TextBox MinWidth="80" Text="{Binding CurrentRecipe.VentingTemp}"/>
+                        <Label Content="℃"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Cathode uniformity:" MinWidth="140"/>
+                        <ComboBox  MinWidth="60" ItemsSource="{Binding select_items}" 
+                                   DisplayMemberPath="Key" SelectedValuePath="Value"
+                                   SelectedValue="{Binding CurrentRecipe.Cath_unif}"
+                                   />
+                        
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Substrate cooling:" MinWidth="140"/>
+                        <ComboBox MinWidth="60" ItemsSource="{Binding select_items}" 
+                                   DisplayMemberPath="Key" SelectedValuePath="Value"
+                                   SelectedValue="{Binding CurrentRecipe.Coldtrap}"
+                                  />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Repetition Blok" IsEnabled="False">
+                <StackPanel Margin="0,2,0,2">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of repetition blok1:</Label>
+                        <TextBox Width="30" Background="#FFFFA4A4" >
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of repetition blok2:</Label>
+                        <TextBox Width="30" Background="#FFFFFFA4"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of repetition blok3:</Label>
+                        <TextBox Width="30" Background="#FFA4FFA4"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of repetition blok4:</Label>
+                        <TextBox Width="30" Background="#FFA4FFFF"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of repetition blok5:</Label>
+                        <TextBox Width="30" Background="#FFA4B4FF"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Number of steps for recipe:</Label>
+                        <TextBox Width="30" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Label>Total number of process steps:</Label>
+                        <TextBox Width="30" ></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="2,0,2,0">
+            <DataGrid 
+                DataContext="{Binding Source={StaticResource Locator}, Path=processSequenceViewModle}"
+                Height="410" Width="300" ItemsSource="{Binding RecipeSequence}" AutoGenerateColumns="False" 
+                IsReadOnly="True"  
+                CanUserAddRows="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="0">
+                                <Setter Property="Background" Value="White"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="1">
+                                <Setter Property="Background" Value="#FFFFA4A4"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="2">
+                                <Setter Property="Background" Value="#FFFFFFA4"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="3">
+                                <Setter Property="Background" Value="#FFA4FFA4"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="4">
+                                <Setter Property="Background" Value="#FFA4FFFF"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Rep_blok}" Value="5">
+                                <Setter Property="Background" Value="#FFA4B4FF"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Seq_no}" Header="No." Width="40" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Step_name}" Header="step" Width="130" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Rep_blok}" Header="blok" Width="40" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Repetition}" Header="Repetition" Width="80" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

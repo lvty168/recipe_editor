@@ -1,0 +1,34 @@
+﻿<Window x:Class="NewRecipeViewer.Views.Dialog.StepDialog.NewStepDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewRecipeViewer.Views.Dialog.StepDialog"
+        mc:Ignorable="d"
+        Title="Add New Step" Height="200" Width="350">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="0,2,0,0" >
+            <Label Content="Add new step:" MinHeight="30"/>
+            <StackPanel Orientation="Horizontal" MinHeight="30" Margin="0,2,0,0">
+                <Label Content="Name:" Width="77" VerticalContentAlignment="Center"/>
+                <TextBox MinWidth="120" 
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                         Text="{Binding new_step.Step_name,RelativeSource={RelativeSource AncestorType=Window}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinHeight="30" Margin="0,2,0,0">
+                <Label Content="Step type："/>
+                <ComboBox MinWidth="120"  Name="step_type"
+                          ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window},Path=step_type_dict}"
+                          DisplayMemberPath="Key" SelectedValuePath="Value"
+                          SelectedValue="{ Binding new_step.Step_type,RelativeSource={RelativeSource AncestorType=Window}}"
+                          />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,16,10,2">
+                <Button Height="30" Width="100" Content="OK" Margin="0,0,20,0" Click="Accept_Button_Click"></Button>
+                <Button Height="30" Width="100" Content="Cancel" IsCancel="True"/>
+
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

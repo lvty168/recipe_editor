@@ -1,0 +1,105 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer"
+             xmlns:ViewModels="clr-namespace:NewRecipeViewer.ViewModels"
+             
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:b ="http://schemas.microsoft.com/xaml/behaviors"
+             x:Class="NewRecipeViewer.Views.DurationPageControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="1000">
+    
+    <Grid>
+        
+        <StackPanel Orientation="Horizontal" >
+            <GroupBox Header="Duration:" Height="300" MinWidth="320" VerticalAlignment="Top" 
+                      Margin="2,2,2,2" >
+                <StackPanel Orientation="Vertical" 
+                            DataContext="{Binding Source={StaticResource Locator}, Path=durationViewModel}" IsEnabled="{Binding Edit_Enable}">
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" >
+                        <Label Content="Total step time:" Width="112"/>
+                        <TextBox Width="120" MaxLines="1" Text="{Binding Duration_parameters.total_step_time,
+                            Converter={StaticResource FloatToTimeString}}" HorizontalAlignment="Stretch" 
+                                 HorizontalContentAlignment="Center"
+                                 >
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+
+                        </TextBox>
+                        <Label Content="[hh:mm:ss]" Width="72"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" IsEnabled="{Binding Total_Ah_Visible_Control}">
+                        <Label Content="Total Ah" Width="112"/>
+                        <TextBox Width="120" MaxLines="1" 
+                                 Text="{Binding Duration_parameters.total_ah}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[Ah]" Width="72"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                                IsEnabled="{Binding Cath_On_Time_Visible_Control}">
+                        <Label Content="Cathode On time" Width="112"/>
+                        <TextBox Width="120" MaxLines="1" Text="{Binding Duration_parameters.cathode_on_time, 
+                            Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        
+                        <Label Content="[hh:mm:ss]"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                                IsEnabled="{Binding Cath_Off_Time_Visible_Control}">
+                        <Label Content="Cathode Off time" Width="112"/>
+                        <TextBox Width="120" MaxLines="1" Text="{Binding Duration_parameters.cathode_off_time, 
+                            Converter={StaticResource FloatToTimeString}}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[hh:mm:ss]" Width="72"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                                IsEnabled="{Binding Base_Pressure_Visible_Control}">
+                        <Label Content="Base pressure" Width="112"/>
+                        <TextBox Width="120" MaxLines="1" Text="{Binding Duration_parameters.base_pressure, 
+                            Converter={StaticResource FloatToScientific}}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[mbar]" Width="72"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                                IsEnabled="{Binding Base_Temperature_Visible_Control}">
+                        <Label Content="Base temperature"/>
+                        <TextBox Width="120" MaxLines="1" 
+                                 Text="{Binding Duration_parameters.base_temperature}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <local:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[°C]" Width="72"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" Visibility="Hidden">
+                        <Label Content="Minimum AmpMinutes/CARC"/>
+                        <TextBox Width="120" Text="{Binding Duration_parameters.minimum_ampMinutes_CARC}"/>
+                        <Label Content="[Amin/CARC]"/>
+                        <Label  Background="Blue" Foreground="White" Width="120" Margin="10,0,0,0" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="0"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

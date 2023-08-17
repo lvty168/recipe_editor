@@ -1,0 +1,63 @@
+﻿<Window x:Class="NewRecipeViewer.Views.Dialog.EditRecipeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewRecipeViewer.Views.Dialog"
+        mc:Ignorable="d"
+        Title="Recipe Header" Height="260" Width="470">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2" >
+                <Label Content="Recipe:"/>
+                <TextBlock MinWidth="120" Block.TextAlignment="Center" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding Path=CurrentRecipe.Rev_name, 
+                    Converter={StaticResource StringTrim}, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="Reversion:"/>
+                <TextBlock MinWidth="30" Block.TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Text="{Binding Path=CurrentRecipe.Rcp_rev, RelativeSource={RelativeSource AncestorType=Window}}"/>
+            </StackPanel>
+            <StackPanel Margin="0,2,0,0" Orientation="Horizontal" IsEnabled="False">
+                <Label Content="User:"/>
+                <TextBlock MinWidth="120"/>
+            </StackPanel>
+            <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                <Label Content="Release Level:" Width="126"/>
+                <ComboBox MinWidth="120" Name="ID_release"
+                          ItemsSource ="{Binding Release_items, RelativeSource={RelativeSource AncestorType=Window}}" 
+                          SelectedValuePath="Value" 
+                          DisplayMemberPath="Key" 
+                          SelectedValue="{Binding CurrentRecipe.IDrelease, Mode=TwoWay, 
+                    RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="Venting Temperat:" Margin="10,0,0,0" Width="120"/>
+                <TextBox MinWidth="60" MaxLines="1" HorizontalContentAlignment="Center"  Text="{Binding CurrentRecipe.VentingTemp, Mode=TwoWay, 
+                    
+                    RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="℃"/>
+            </StackPanel>
+            <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                <Label Content="Cathode Uniformity:"/>
+                <ComboBox MinWidth="60"
+                          ItemsSource ="{Binding select_items,RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedValue="{Binding CurrentRecipe.Cath_unif,RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Label Content="ForcedCooling:" Margin="70,0,0,0" Width="120"/>
+                <ComboBox MinWidth="60"
+                          ItemsSource ="{Binding select_items,RelativeSource={RelativeSource AncestorType=Window}}" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedValue="{Binding CurrentRecipe.Coldtrap,RelativeSource={RelativeSource AncestorType=Window}}"/>
+            </StackPanel>
+            <StackPanel Margin="0,2,0,0" Orientation="Horizontal" IsEnabled="False">
+                <Label Content="Reversion Notes:"/>
+                <TextBox MinWidth="300" MinHeight="60"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,16,10,2">
+                <Button Height="30" Width="100" Content="OK" Margin="0,0,20,0"  IsDefault="True"
+                        Click="acceptButton_Click"/>
+                <Button Height="30" Width="100" Content="Cancel" IsCancel="True" ></Button>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,221 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer"
+             xmlns:ViewModels="clr-namespace:NewRecipeViewer.ViewModels" 
+             x:Class="NewRecipeViewer.Views.BiasPageControl"
+             mc:Ignorable="d" 
+             xmlns:b ="http://schemas.microsoft.com/xaml/behaviors"
+             
+             d:DesignHeight="480" d:DesignWidth="1000">
+
+    <Grid>
+        <GroupBox Header="bias" Width="750" HorizontalAlignment="Left" DataContext="{Binding biasViewModel, Source={StaticResource Locator}}"
+                  IsEnabled="{Binding Edit_Enable}">
+            <!--IsEnabled="{Binding CurrentRecipe.IDrelease, Converter={StaticResource ConvertEditEnable}, Mode=OneWay}"-->
+            <WrapPanel Orientation="Horizontal" Margin="2,2,2,2">
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Width="320"
+                            IsEnabled="{Binding Bias_enable}">
+                    <Label Content="Select voltage mode"/>
+                    <ComboBox Width="160" ItemsSource="{Binding Bias_level_dict}" 
+                              SelectedValuePath="Value" DisplayMemberPath="Key" 
+                              SelectedValue="{Binding BiasLevel}" >
+                    </ComboBox>
+                    <Label Content="[-]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" 
+                            IsEnabled="{Binding GlowDischargeMode}">
+                    <Label Content="Control mode"/>
+                    <ComboBox Width="160" ItemsSource="{Binding Bias_mode_dict}" 
+                              SelectedValuePath="Value" DisplayMemberPath="Key"
+                              SelectedValue="{Binding BiasMode}"/>
+                    <Label Content="[-]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Width="320" 
+                            IsEnabled="{Binding Bias_enable}">
+                    <Label Content="Start voltage"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80"  
+                             Text="{Binding BiasParameter.Start_voltage}" MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[V]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" IsEnabled="{Binding VoltageMode, Mode=OneWay}">
+
+                    <Label Content="End voltage"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.end_voltage}" 
+                             IsEnabled="{Binding VoltageMode, Mode=OneWay}" MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[V]"/>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Width="320" 
+                            IsEnabled="{Binding GlowDischargeMode}">
+                    <Label Content="Start current"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.Start_current}" 
+                              MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[A]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" IsEnabled="{Binding CurrentMode, Mode=OneWay}">
+
+                    <Label Content="End current"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.end_current}" 
+                             IsEnabled="{Binding CurrentMode,Mode=OneWay}" MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[A]"/>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="500">
+
+                    <Label Content="Delay time"/>
+                    <TextBox Width="120" Text="{Binding BiasParameter.bias_delay_time,
+                        Converter={StaticResource FloatToTimeString}}" MaxLines="1"
+                             IsEnabled="{Binding RampOn, Mode=OneWay}" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[hh:mm:ss]"/>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="500" IsEnabled="{Binding Bias_enable}">
+                    <Label Content="Ramp time"/>
+                    <TextBox  Width="120" Text="{Binding BiasRamp,
+                        Converter={StaticResource FloatToTimeString}}" MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[hh:mm:ss]"/>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="320" 
+                            IsEnabled="{Binding Bias_enable}">
+                    <Label Content="Arc detection I"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.arc_detection_I}" MaxLines="1" 
+                             HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[A]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="310" IsEnabled="False" >
+                    <Label Content="U Arc detect"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.U_arc_detection}" MaxLines="1" 
+                             HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[V]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="320" 
+                            IsEnabled="{Binding GlowDischargeMode, Mode=OneWay
+                    }">
+                    <Label Content="Plasma detection I"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.plasma_detection_I}" 
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[mA]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="310" IsEnabled="False">
+                    <Label Content="I Arc detect"/>
+
+                    <TextBox Width="80" Text="{Binding BiasParameter.I_arc_detection}" 
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[A]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="320" 
+                            IsEnabled="{Binding GlowDischargeMode, Mode=OneWay
+                    }">
+                    <Label Content="Plasma detection U"/>
+                    <Label Content="{Binding HighLowMode}"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.plasma_detection_U}" 
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[V]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="310" IsEnabled="False" >
+                    <Label Content="Arc freq. limit"/>
+
+                    <TextBox Width="80" Text="{Binding BiasParameter.arc_frequency_limit}"
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[/min]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="500" 
+                            IsEnabled="{Binding PlsMode, Mode=OneWay}">
+
+                    <Label Content="Pulse frequency"/>
+
+                    <TextBox Width="80" Text="{Binding BiasParameter.pulse_frequency}" 
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[kHz]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="500" 
+                            IsEnabled="{Binding PlsMode, Mode=OneWay
+                    }">
+                    <Label Content="Pulse R.R.T."/>
+
+                    <TextBox Width="80" Text="{Binding BiasParameter.pulse_rrt}" MaxLines="1" 
+                             HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[µs]"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2,2,2,2" MinWidth="500">
+                    <Label Content="Rotation speed"/>
+                    <TextBox Width="80" Text="{Binding BiasParameter.rotation_speed}" 
+                             MaxLines="1" HorizontalContentAlignment="Center">
+                        <b:Interaction.Behaviors>
+                            <local:TextBoxEnterKeyUpdateBehavior/>
+                        </b:Interaction.Behaviors>
+                    </TextBox>
+                    <Label Content="[rpm]"/>
+                    <TextBox Width="0"/>
+                </StackPanel>
+            </WrapPanel>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

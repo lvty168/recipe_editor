@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="NewRecipeViewer.Views.UbmPlmControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer.Views"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:bs="clr-namespace:NewRecipeViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="2,2,2,2" >
+            <GroupBox  Header="UBM" Height="80" Width="400" HorizontalAlignment="Left">
+                
+            </GroupBox>
+            <GroupBox Header="PLM" Width="400" Height="80" HorizontalAlignment="Left" 
+                      DataContext="{Binding Source={StaticResource Locator},Path=Ubm_PlmViewModel}" IsEnabled="{Binding Edit_enable}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" IsEnabled="{Binding Plm_current_enable}">
+                        <Label Content="Plasma current:" />
+                        <TextBox Width="100" Text="{Binding Plm_parameter.plasma_current }" MaxLines="1" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <bs:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <TextBox Width="0"/>
+                        <Label Content="[A]"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

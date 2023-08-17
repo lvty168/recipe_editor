@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NewRecipeViewer</id>
+    <version>1.0.0</version>
+    <authors>NewRecipeViewer</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net5.0-windows7.0">
+        <dependency id="DryIoc.dll" version="5.2.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="5.0.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Toolkit.Mvvm" version="7.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Xaml.Behaviors.Wpf" version="1.1.39" exclude="Build,Analyzers" />
+        <dependency id="System.Data.Odbc" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Windows.Interactivity.WPF" version="2.0.20525" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net5.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="E:\vswork\NewRecipeViewerForT2\WpfApp1\bin\x86\Release\net5.0-windows\NewRecipeViewer.runtimeconfig.json" target="lib\net5.0-windows7.0\NewRecipeViewer.runtimeconfig.json" />
+    <file src="E:\vswork\NewRecipeViewerForT2\WpfApp1\bin\x86\Release\net5.0-windows\NewRecipeViewer.dll" target="lib\net5.0-windows7.0\NewRecipeViewer.dll" />
+  </files>
+</package>

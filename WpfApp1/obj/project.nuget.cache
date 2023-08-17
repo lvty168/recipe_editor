@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "Atq9wa0uAdwG0uHKZY9ZxyoPaceXugFAThtfhtPHiMSTuXUTdk72wd4BS/dTt9YkV7kbsDdD4m5ipRumnn9rJA==",
+  "success": true,
+  "projectFilePath": "E:\\VSWork\\NewRecipeViewerForT2\\WpfApp1\\NewRecipeViewer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\dryioc.dll\\5.2.2\\dryioc.dll.5.2.2.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\microsoft.toolkit.mvvm\\7.1.2\\microsoft.toolkit.mvvm.7.1.2.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\system.data.odbc\\6.0.0\\system.data.odbc.6.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator.BUC9GEBUJ6144QK\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8”而不是项目目标框架“net5.0-windows7.0”还原包“System.Windows.Interactivity.WPF 2.0.20525”。此包可能与项目不完全兼容。",
+      "libraryId": "System.Windows.Interactivity.WPF",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    }
+  ]
+}

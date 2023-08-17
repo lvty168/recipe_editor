@@ -1,0 +1,86 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewRecipeViewer.Views"
+             xmlns:bs="clr-namespace:NewRecipeViewer" 
+             x:Class="NewRecipeViewer.Views.HeatingPageControl"
+             mc:Ignorable="d" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             
+             d:DesignHeight="480" d:DesignWidth="1000">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Heating" Height="300" MinWidth="320" VerticalAlignment="Top" Margin="2,2,2,2" 
+                      >
+                <StackPanel Orientation="Vertical" Margin="0,2,0,2" 
+                            DataContext="{Binding Source={StaticResource Locator},Path=heatingViewModle}" IsEnabled="{Binding Edit_Enable}">
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" >
+                        <Label Content="Max. heater power" Width="143"/>
+                        <TextBox MinWidth="80" MaxLines="1" 
+                                 Text="{Binding Heating_parameters.heating_power}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <bs:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[%]" Width="31"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                        <Label Content="Heating temperature" Width="143"/>
+                        <TextBox MinWidth="80" MaxLines="1" 
+                                 Text="{Binding Heating_parameters.heating_temperature}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <bs:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[°C]" Width="31"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                                Visibility="{Binding Htr_Max_Visibility}">
+                        <Label Content="Maximum temperature"/>
+                        <TextBox MinWidth="80" MaxLines="1" 
+                                 Text="{Binding Heating_parameters.max_temperature}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <bs:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[°C]"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                               Visibility="{Binding Htr_Min_Visibility}">
+                        <Label Content="Minimum temperature" Width="143"/>
+                        <TextBox MinWidth="80" MaxLines="1" 
+                                 Text="{Binding Heating_parameters.min_temperature}" HorizontalContentAlignment="Center">
+                            <b:Interaction.Behaviors>
+                                <bs:TextBoxEnterKeyUpdateBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Label Content="[°C]" Width="31"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                        <Label Content="Pumping speed" Width="143"/>
+                        <ComboBox MinWidth="80"
+                                  ItemsSource="{Binding Pump_spd}" SelectedValuePath="Value" DisplayMemberPath="Key"  
+                                  SelectedValue="{Binding Heating_parameters.pump_speed}" HorizontalContentAlignment="Center"
+                                  />
+                        <Label Content="[%]" Width="31"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2" 
+                               Visibility="{Binding Water_System_Mode_Visibility}">
+                        <Label Content="Water system mode" Width="143"/>
+                        <ComboBox MinWidth="80" ItemsSource="{Binding WaterSysMode}" SelectedValuePath="Value"
+                                  DisplayMemberPath="Key" SelectedValue="{Binding Heating_parameters.water_system_mode}" HorizontalContentAlignment="Center"/>
+                        <Label Content="[-]" Width="31"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="0"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

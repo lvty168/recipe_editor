@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>E:\vswork\NewRecipeViewerForT2\WpfApp1\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Dialog\RecipeDialog\EditRecipeDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Dialog\RecipeDialog\NewRecipeDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Dialog\RecipeDialog\SaveRecipeAsDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Dialog\StepDialog\EditStepDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Dialog\StepDialog\NewStepDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BiasPageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CathodePageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DurationPageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GasFlowPageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HeatingPageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RecipePageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StepPageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UbmPlmControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
